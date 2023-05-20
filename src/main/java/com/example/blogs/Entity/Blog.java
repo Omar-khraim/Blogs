@@ -1,5 +1,7 @@
 package com.example.blogs.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,13 +23,12 @@ public class Blog {
     private String title;
 
     @ManyToOne
+    @JsonBackReference
     private Users owner;
 
-    @ManyToMany(mappedBy = "enrolledBlogs")
+    @JsonIgnoreProperties("enrolledBlogs")
+    @ManyToMany(mappedBy = "enrolledBlogs", fetch = FetchType.LAZY)
     private List<Users> members;
-
-
-
 
 
 }
