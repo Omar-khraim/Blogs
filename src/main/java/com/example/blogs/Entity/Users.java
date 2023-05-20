@@ -1,11 +1,14 @@
 package com.example.blogs.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.stereotype.Indexed;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,6 +18,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(indexes = @Index(name = "user_email_index", columnList = "email"))
 public class Users {
 
     @Id
@@ -44,13 +48,15 @@ public class Users {
     @UpdateTimestamp
     private LocalDate updated;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "owner")
+    @JsonIgnoreProperties("owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Blog> ownedBlogs;
 
-    @ManyToMany
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Blog> enrolledBlogs;
 
 
