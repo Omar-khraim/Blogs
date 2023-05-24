@@ -1,4 +1,4 @@
-package com.example.blogs.Entity;
+package com.example.blogs.Domain.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.stereotype.Indexed;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
