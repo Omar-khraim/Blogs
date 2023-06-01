@@ -1,4 +1,4 @@
-package com.example.blogs.Entity;
+package com.example.blogs.Domain.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
